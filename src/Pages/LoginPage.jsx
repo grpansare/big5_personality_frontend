@@ -47,7 +47,7 @@ const LoginPage = () => {
             </button>
 
             {/* Links */}
-            <div className="links">
+            <div className="login-links">
               <a href="#" className="forgot-password">Forgot Password?</a>
               <a href="#" className="register-link">New user? Register here</a>
             </div>

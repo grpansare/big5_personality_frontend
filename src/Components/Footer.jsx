@@ -47,7 +47,7 @@ const Footer = () => {
         </div>
         <div>
           <h4>Personality Traits</h4>
-          <a href="/openness" className="links">
+          <a href="/openness" className="links flex">
             <FaLightbulb size={18} /> Openness
           </a>
           <a href="/conscientiousness" className="links">
