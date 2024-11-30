@@ -8,17 +8,20 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Header from './Components/Header';
 import AboutUs from './Pages/AboutUs';
 import Footer from './Components/Footer';
+import Signup from './Pages/Signup';
+import './App.css'
 
 
 const App = () => {
   return (
     <BrowserRouter>
-      <Header/>
+   
     <Routes>
       <Route path='/' element={<Home/>}/>
       <Route path='/about' element={<AboutUs/>}/>
+      <Route path='/signup' element={<Signup/>}/>
     </Routes>
-    <Footer/>
+   
      
     </BrowserRouter>
   )

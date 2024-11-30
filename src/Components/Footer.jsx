@@ -15,16 +15,16 @@ const Footer = () => {
         <div className='flex text-white'>
           {/* Social Media Links */}
           <a href="/">
-            <FaFacebookSquare size={30} />
+            <FaFacebookSquare size={30}  color='white' />
           </a>
           <a href="/">
-            <FaInstagramSquare size={30} />
+            <FaInstagramSquare size={30} color='white'  />
           </a>
           <a href="/">
-            <FaTwitterSquare size={30} />
+            <FaTwitterSquare size={30} color='white'  />
           </a>
           <a href="/">
-            <FaLinkedin size={30} />
+            <FaLinkedin size={30} color='white'  />
           </a>
         </div>
       </div>
@@ -71,12 +71,7 @@ const Footer = () => {
           <a href="/faq" className="links">
             <FaQuestionCircle size={18} /> FAQs
           </a>
-          <a href="/shipping" className="links">
-            <FaShippingFast size={18} /> Shipping Information
-          </a>
-          <a href="/returns" className="links">
-            <FaUndo size={18} /> Returns & Exchanges
-          </a>
+         
         </div>
         <div>
           <h4>Legal</h4>

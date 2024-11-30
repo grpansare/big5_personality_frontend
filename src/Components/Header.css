@@ -1,0 +1,9 @@
+/* In your CSS file or within a <style> tag */
+.navbar-toggler {
+  border-color: white !important; /* Make the border white */
+}
+
+.navbar-toggler-icon {
+  color: white !important;
+  background: transparent;
+}

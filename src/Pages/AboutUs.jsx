@@ -1,6 +1,9 @@
 import React from 'react';
 import { FaHandshake, FaGlobe, FaUsers, FaTrophy } from 'react-icons/fa';
 import Corousel from '../Components/carousel';
+import Header from '../Components/Header';
+import Footer from '../Components/Footer';
+import image from '../assets/Images/P1.jpeg';
 
 const AboutUs = () => {
   const values = [
@@ -32,6 +35,7 @@ const AboutUs = () => {
 
   return (
     <>
+       <Header/>
     <Corousel/>
     <div className="w-full px-6 py-12 bg-gray-50">
       <div className="max-w-5xl mx-auto text-center">
@@ -64,30 +68,31 @@ const AboutUs = () => {
       </div>
 
       {/* Team Section */}
-      <div className="max-w-6xl mx-auto text-center mt-12">
-        <h2 className="text-3xl font-semibold text-gray-800 mb-6">Meet Our Team</h2>
-        <p className="text-gray-600 mb-8">
-          Our team includes experts in psychology, data science, and user experience, all working together to deliver a
-          top-notch platform for personality assessment.
-        </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {[
-            { name: 'Dr. Emma Carter', role: 'Lead Psychologist' },
-            { name: 'James Williams', role: 'Data Scientist' },
-            { name: 'Sophia Brown', role: 'UX Designer' },
-            { name: 'Liam Johnson', role: 'Full-Stack Developer' },
-          ].map((member, index) => (
-            <div
-              key={index}
-              className="flex flex-col items-center text-center bg-white rounded-lg shadow-lg p-4"
-            >
-              <div className="w-24 h-24 bg-gray-200 rounded-full mb-4"></div>
-              <h3 className="text-lg font-semibold text-gray-800">{member.name}</h3>
-              <p className="text-gray-500">{member.role}</p>
-            </div>
-          ))}
+      <div className="max-w-6xl mx-auto text-center flex flex-col items-center mt-12">
+  <h2 className="text-3xl font-semibold text-gray-800 mb-6">Meet Our Team</h2>
+  <p className="text-gray-600 mb-8">
+    Our team includes experts in psychology, data science, and user experience, all working together to deliver a
+    top-notch platform for personality assessment.
+  </p>
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 gap-6">
+    {[
+      { name: 'Ganesh Pansare', role: 'Team Member' },
+      { name: 'Atharv Raut', role:"Team Member" },
+    ].map((member, index) => (
+      <div
+        key={index}
+        className="flex flex-col items-center text-center bg-white rounded-lg shadow-lg p-8 w-80 h-80"
+      >
+        <div className="w-28 h-32 rounded-full mb-6">
+          <img src={image} alt=""  className='rounded-full' />
         </div>
+        <h3 className="text-lg font-semibold text-gray-800">{member.name}</h3>
+        <p className="text-gray-500">{member.role}</p>
       </div>
+    ))}
+  </div>
+</div>
+
 
       {/* CTA Section */}
       <div className="max-w-4xl mx-auto text-center mt-12">
@@ -103,6 +108,7 @@ const AboutUs = () => {
         </a>
       </div>
     </div>
+    <Footer/>
     </>
   );
 };
