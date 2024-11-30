@@ -2,17 +2,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh; /* Use min-height for flexibility */
+  min-height: 100vh; 
   font-family: Arial, sans-serif;
   background-color: #eaeaea;
-  padding: 20px; /* Padding for smaller screens */
-  box-sizing: border-box; /* Prevent overflow issues */
+  padding: 20px; 
+  box-sizing: border-box; 
 }
 
 .login-content {
   display: flex;
   flex-direction: row;
-  width: 70%; /* Flexible width */
+  width: 70%; 
   max-width: 1200px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
@@ -21,7 +21,7 @@
 }
 
 .image-section {
-  flex: 1; /* Equal proportions */
+  flex: 1; 
   display: flex;
   align-items: center;
   justify-content: center;
@@ -31,7 +31,7 @@
 
 .welcome-image {
   width: 90%;
-  height: 90%; /* Maintain aspect ratio */
+  height: 90%; 
   object-fit: cover;
   object-position: center;
 }
@@ -65,7 +65,7 @@ h2 {
 .input-group {
   position: relative;
   width: 100%;
-  max-width: 400px; /* Ensure inputs don't stretch too far */
+  max-width: 400px; 
 }
 
 .input-box {
@@ -135,14 +135,14 @@ h2 {
   text-decoration: underline;
 }
 
-/* Responsive Design with Media Queries */
+
 @media (max-width: 1024px) {
   .login-content {
-    flex-direction: column; /* Stack sections vertically */
+    flex-direction: column; 
   }
 
   .image-section {
-    height: 200px; /* Adjust image height */
+    height: 200px; 
   }
 
   .welcome-image {
