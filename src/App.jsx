@@ -10,6 +10,7 @@ import AboutUs from './Pages/AboutUs';
 import Footer from './Components/Footer';
 import Signup from './Pages/Signup';
 import './App.css'
+import LoginPage from './Pages/LoginPage';
 
 
 const App = () => {
@@ -20,6 +21,7 @@ const App = () => {
       <Route path='/' element={<Home/>}/>
       <Route path='/about' element={<AboutUs/>}/>
       <Route path='/signup' element={<Signup/>}/>
+      <Route path='/Login' element={<LoginPage/>}/>
     </Routes>
    
      

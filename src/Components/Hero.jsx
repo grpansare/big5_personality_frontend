@@ -6,8 +6,8 @@ const Hero = () => {
     <section className="hero py-10  bg-slate-200">
       <div className="container mx-auto flex mt-3 flex-col md:flex-row items-center justify-between">
         {/* Text Content */}
-        <div className="hero-text text-center md:text-left md:w-1/2 px-4">
-          <h1 className="text-4xl md:text-5xl font-serif font-bold leading-tight mb-4">
+        <div className="hero-text  text-center md:text-left md:w-1/2 px-4">
+          <h1 className="text-4xl text-black capitalize  md:text-5xl font-serif font-bold leading-tight mb-4">
             Discover Your Personality <br /> with the Big Five Personality Test
           </h1>
           <p className="text-lg md:text-xl mb-6">
