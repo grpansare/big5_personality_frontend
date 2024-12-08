@@ -1,7 +1,7 @@
-import { Box, FormControl, FormHelperText, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField } from '@mui/material';
+import { Box, FormControl, FormHelperText, IconButton, InputAdornment, InputLabel, MenuItem, OutlinedInput, Select, TextField } from '@mui/material';
 // import axios from 'axios';
 import React, { useState } from 'react';
-import { FaBrain, FaEnvelope, FaGoogle, FaRegKeyboard, FaUser } from 'react-icons/fa';
+import { FaBrain, FaEnvelope, FaGoogle, FaPhone, FaRegKeyboard, FaUser } from 'react-icons/fa';
 import { MdHeight, MdVisibility, MdVisibilityOff } from 'react-icons/md';
 import { FcGoogle } from "react-icons/fc";
 
@@ -63,7 +63,7 @@ const Signup = () => {
                 icon: 'success',
                 confirmButtonText: 'OK'
             }).then(() => {
-                navigate('/');  // Navigate to sign-in after the alert is closed
+                navigate('/login');  // Navigate to sign-in after the alert is closed
             });
            
             }
@@ -94,11 +94,20 @@ const Signup = () => {
     } else if (name === "password") {
         validatePassword(value);
     }
+     else if (name === "phoneno") {
+        validatePhoneNumber(value);
+    }
     else if(name==="cpassword"){
           checkPassword(value,formData.password)
     }
     else if(name==="username"){
         validateUsername(value)
+    }
+    else if(name==="age"){
+        validateAge(value)
+    }
+    else if(name==="designation"){
+        validateDesignation(value)
     }
         
     }
@@ -112,6 +121,7 @@ const Signup = () => {
         clearError("firstname");
     }
 }
+ 
 
 function validateLastname(value) {
     if (!value.trim()) {
@@ -133,6 +143,18 @@ function validateEmail(value) {
         clearError("email");
     }
 }
+function validatePhoneNumber(value) {
+    const phoneRegex =/^(\+91[\-\s]?)?[6-9]\d{9}$/
+
+    ;
+    if (!value.trim()) {
+        setError({ errortype: "phoneno", errormsg: "Phone number is required." });
+    } else if (!phoneRegex.test(value)) {
+        setError({ errortype: "phoneno", errormsg: "Invalid phone number format." });
+    } else {
+        clearError("phoneno");
+    }
+}
 function validateUsername(value){
     if (!value.trim()) {
         setError({ errortype: "username", errormsg: "Username is required." });
@@ -144,6 +166,27 @@ function validateUsername(value){
         clearError("username")
     }
 }
+function validateDesignation(value){
+    if (!value.trim()) {
+        setError({ errortype: "designation", errormsg: "designation is required." });
+    } 
+  
+    else{
+        clearError("designation")
+    }
+}
+function validateAge(value) {
+    value = Number.parseInt(value);
+    
+    if (!value && value !== 0) {
+        setError({ errortype: "age", errormsg: "Age is required." });
+    } else if (value <= 0 || value > 150) {
+        setError({ errortype: "age", errormsg: "Please enter a valid age." });
+    } else {
+        clearError("age");
+    }
+}
+
 function validatePassword(value) {
     if (value.length < 8) {
         
@@ -261,6 +304,48 @@ function checkPassword(cpass,pass){
                           }}
                     />
                     </div>
+                    <div className="w-full flex mb-2  items-center  sx={{ m: 1, width: '100%' }}">
+                    <TextField
+                       onChange={handleChange}
+                        type="text"
+                        id="outlined-email"
+                        label="Phone Number"
+                        className="w-1/2"
+                        name="phoneno"
+                        helperText={error?.errortype == 'phoneno' ? error.errormsg : ""}
+                        error={error?.errortype === "phoneno"}
+                        variant="outlined"
+                        slotProps={{
+                            input: {
+                              endAdornment: <InputAdornment position="start"><FaPhone/></InputAdornment>,
+                            },
+                          }}
+                    />
+                       <TextField
+          id="outlined-select-currency"
+          select
+          label="Designation"
+          defaultValue="Student"
+          name="designation"
+          onChange={handleChange}
+          helperText={error?.errortype == 'designation' ? error.errormsg : ""}
+          error={error?.errortype === "designation"}
+          
+        >
+        
+            <MenuItem value="Student">
+             Student
+            </MenuItem>
+        
+            <MenuItem value="Teacher">
+            Teacher
+            </MenuItem>
+            <MenuItem value="Professional">
+            Professional
+            </MenuItem>
+         
+        </TextField>
+                    </div>
                     <div className="w-full flex  sx={{ m: 1, width: '100%' }}">
                     <TextField
                        onChange={handleChange}
@@ -271,6 +356,25 @@ function checkPassword(cpass,pass){
                         className="w-full"
                         name="username"
                         helperText={error?.errortype == "username"?error.errormsg :""}
+                        variant="outlined"
+                        slotProps={{
+                            input: {
+                              endAdornment: <InputAdornment position="start"><FaUser/></InputAdornment>,
+                            },
+                          }}
+                    />
+                    </div>    
+
+                    <div className="w-full flex  sx={{ m: 1, width: '100%' }}">
+                    <TextField
+                       onChange={handleChange}
+                        type="text"
+                        id="outlined-email"
+                        label="age"
+                        error={error?.errortype === "age"}
+                        className="w-full"
+                        name="age"
+                        helperText={error?.errortype == "age"?error.errormsg :""}
                         variant="outlined"
                         slotProps={{
                             input: {
@@ -356,7 +460,7 @@ function checkPassword(cpass,pass){
                 </button>
                 <div className='  mt-3   '>
               <p>Already have an account? 
-                <NavLink to="/signup" className="text-blue-500 ml-2 font-bold">Sign in</NavLink>
+                <NavLink to="/login" className="text-blue-500 ml-2 font-bold">Sign in</NavLink>
               </p>
              
             </div>

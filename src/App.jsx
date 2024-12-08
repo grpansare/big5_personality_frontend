@@ -11,15 +11,25 @@ import Footer from './Components/Footer';
 import Signup from './Pages/Signup';
 import './App.css'
 import LoginPage from './Pages/LoginPage';
+import ContactUs from './Pages/ContactUs';
+import Homepage from './Pages/Homepage';
+import ProfilePage from './Pages/ProfilePage';
 
 
 const App = () => {
   return (
     <BrowserRouter>
-   
+
     <Routes>
-      <Route path='/' element={<Home/>}/>
-      <Route path='/about' element={<AboutUs/>}/>
+      <Route path='/' element={<Homepage/>}>
+        <Route path='/' element={<Home/>}/>
+
+       <Route path='/about' element={<AboutUs/>}/>
+     
+      
+      <Route path='/contact' element={<ContactUs/>}/>
+      <Route path='/userprofile' element={<ProfilePage/>}/>
+      </Route>
       <Route path='/signup' element={<Signup/>}/>
       <Route path='/Login' element={<LoginPage/>}/>
     </Routes>

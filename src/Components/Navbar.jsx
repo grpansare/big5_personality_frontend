@@ -7,23 +7,32 @@ import { FaArrowRight, FaBrain, FaEnvelope, FaHome, FaInfoCircle, FaSignInAlt } 
 import { motion } from 'framer-motion';
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { Dropdown } from 'react-bootstrap';
 
+const menuItems = [
+  {
+    name: 'Home',
+    href: '/',
+  },
+  {
+    name: 'About',
+    href: 'about',
+  },
+  {
+    name: 'Contact',
+    href: '#',
+  },
+]
 
-
- function Header() {
+export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false)
-  const {currentUser}=useSelector((state)=>state.user)
-  console.log(currentUser);
-  
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
   }
 
   return (
-    <div className=" flex items-center  text-white  w-full bg-gray-700 " >
- <div className="mx-auto flex border w-full px-4   items-center justify-between   h-full">
+    <div className=" flex items-center text-white  w-full bg-gray-700 " >
+ <div className="mx-auto flex border w-full px-4 py-1  items-center justify-between   h-full">
 
 
         <div className="inline-flex lg:text-lg text-sm font-mono items-center ">
@@ -87,7 +96,7 @@ import { Dropdown } from 'react-bootstrap';
                   className="text-white d-flex justify-content-center align-items-center rounded px-2 py-2"
                   style={{ textDecoration: "none" }}
                 >
-                 Test Results
+                  Take the Test
                   <FaArrowRight className="ms-2" />
                 </NavLink>
               </motion.li>
@@ -115,62 +124,21 @@ import { Dropdown } from 'react-bootstrap';
                   <FaEnvelope className="me-2" /> Contact Us
                 </NavLink>
               </motion.li>
-
-              {currentUser ?  (<li
-              
-                className="rounded"
-              >
-     <Dropdown>
-     <Dropdown.Toggle
-  variant=""
-  id="dropdown-basic"
-  bsPrefix="custom-dropdown-toggle" // Custom class to override default styles
-  className="flex items-center   gap-2 p-0 bg-transparent border-0"
->
-  <div className="rounded-full  py-2 px-3 bg-blue-300 text-black font-bold flex justify-center items-center">
-     {/* {currentUser?.fullname?.split(" ")[0].charAt(0)}{currentUser.fullname.split(" ")[1].charAt(0)}  */}
-  </div>
-</Dropdown.Toggle>
-
-
-
-      <Dropdown.Menu>
-        <Dropdown.Item >
-
-          <NavLink to="/userprofile">
-                Profile
+              <NavLink
+            to="/signup"
+            className="rounded-md bg-transparent text-decoration-none text-white px-3 py-2 text-sm font-semibold  hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          >
+            Sign Up
           </NavLink>
-        </Dropdown.Item>
-        <Dropdown.Item 
-        >Logout</Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>
-              </li>)
-              :
-              (
-                <div>
-                <NavLink
-                to="/signup"
-                className="rounded-md bg-transparent text-decoration-none text-white px-3 py-2 text-sm font-semibold  hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-              >
-                Sign Up
-              </NavLink>
-                   <Button 
-                   component={Link} 
-                   to="/login" 
-                   variant="outlined" 
-                    color="white">
-                   Login
-                 </Button>
-                 </div>
-              
-              )
-            
-            }
-            
      
 
-
+<Button 
+  component={Link} 
+  to="/login" 
+  variant="outlined" 
+   color="white">
+  Login
+</Button>
 
 
             
@@ -209,7 +177,6 @@ import { Dropdown } from 'react-bootstrap';
          
                 <NavLink
                   to="/"
-                  onClick={toggleMenu}
                   className=" d-flex justify-content-center align-items-center rounded px-3 py-2"
                   style={{ textDecoration: "none" }}
                 >
@@ -220,7 +187,6 @@ import { Dropdown } from 'react-bootstrap';
             
                 <NavLink
                   to="/about"
-                  onClick={toggleMenu}
                   className=" d-flex justify-content-center align-items-center rounded px-3 py-2"
                   style={{ textDecoration: "none" }}
                 >
@@ -230,7 +196,6 @@ import { Dropdown } from 'react-bootstrap';
 
                 <NavLink
                   to="/test"
-                  onClick={toggleMenu}
                   className=" d-flex justify-content-center align-items-center rounded px-2 py-2"
                   style={{ textDecoration: "none" }}
                 >
@@ -245,7 +210,6 @@ import { Dropdown } from 'react-bootstrap';
 
                 <NavLink
                   to="/contact"
-                  onClick={toggleMenu}
                   className=" d-flex justify-content-center align-items-center rounded px-3 py-2"
                   style={{ textDecoration: "none" }}
                 >
@@ -258,28 +222,20 @@ import { Dropdown } from 'react-bootstrap';
 
                   </nav>
                 </div>
-
-                {currentUser ? "userprofile" :
-                (
                 <div className="mt-2 space-y-2">
-                  <Button
-                    component={NavLink}
-                    to="/signup"
+                  <button
+                    type="button"
                     className="w-full rounded-md border border-black px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
                   >
-                    Sign Up
-                  </Button>
-                  <Button
-                       component={NavLink}
-                    to="/login"
+                    Sign In
+                  </button>
+                  <button
                     type="button"
                     className="w-full rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
                   >
                     Log In
-                  </Button>
+                  </button>
                 </div>
-                )
-              }
               </div>
             </div>
           </div>
@@ -288,4 +244,3 @@ import { Dropdown } from 'react-bootstrap';
     </div>
   )
 }
-export default Header

@@ -1,9 +1,17 @@
-/* In your CSS file or within a <style> tag */
-.navbar-toggler {
-  border-color: white !important; /* Make the border white */
+.relative {
+  height: 60px;
 }
 
-.navbar-toggler-icon {
-  color: white !important;
-  background: transparent;
+
+@media (max-width: 576px) {
+  .brand-text {
+    font-size: 14px; /* Smaller text size on small screens */
+    display: block; /* Ensure the text moves below the icon if needed */
+    text-align: center;
+  }
+
+  .fa-brain {
+    margin: 0 auto; /* Center icon for small screens */
+    display: block;
+  }
 }

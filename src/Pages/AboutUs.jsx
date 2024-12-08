@@ -35,7 +35,7 @@ const AboutUs = () => {
 
   return (
     <>
-       <Header/>
+       {/* <Header/> */}
     <Corousel/>
     <div className="w-full px-6 py-12 bg-gray-50">
       <div className="max-w-5xl mx-auto text-center">
@@ -71,8 +71,7 @@ const AboutUs = () => {
       <div className="max-w-6xl mx-auto text-center flex flex-col items-center mt-12">
   <h2 className="text-3xl font-semibold text-gray-800 mb-6">Meet Our Team</h2>
   <p className="text-gray-600 mb-8">
-    Our team includes experts in psychology, data science, and user experience, all working together to deliver a
-    top-notch platform for personality assessment.
+   
   </p>
   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 gap-6">
     {[
@@ -108,7 +107,7 @@ const AboutUs = () => {
         </a>
       </div>
     </div>
-    <Footer/>
+   
     </>
   );
 };

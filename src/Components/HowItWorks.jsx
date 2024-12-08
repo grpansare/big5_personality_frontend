@@ -1,7 +1,12 @@
 import React from 'react';
 import { FaClipboardList, FaUserAlt, FaCheckCircle, FaShippingFast } from 'react-icons/fa'; // React Icons
+import {motion} from 'framer-motion'
 
 const HowItWorks = () => {
+  const cardVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0 },
+  };
   const steps = [
     {
       id: 1,
@@ -31,19 +36,36 @@ const HowItWorks = () => {
 
   return (
     <div className="w-full px-6 py-12">
-      <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">How It Works</h1>
-      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {steps.map((step) => (
-          <div key={step.id} className="bg-white rounded-lg shadow-lg p-6 text-center">
-            <div className="bg-green-500 p-4 rounded-full mb-6 inline-block">
-              {step.icon}
-            </div>
-            <h3 className="text-xl font-semibold text-gray-800 mb-3">{step.title}</h3>
-            <p className="text-gray-600">{step.description}</p>
+    <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">How It Works</h1>
+    <motion.div
+      className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{  amount: 0.2 }} // Triggers animation when 20% of the element is visible
+      variants={{
+        visible: {
+          transition: {
+            staggerChildren: 0.2, // Delay between each card animation
+          },
+        },
+      }}
+    >
+      {steps.map((step) => (
+        <motion.div
+          key={step.id}
+          className="bg-white rounded-lg shadow-lg p-6 text-center"
+          variants={cardVariants}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+        >
+          <div className="bg-green-500 p-4 rounded-full mb-6 inline-block">
+            {step.icon}
           </div>
-        ))}
-      </div>
-    </div>
+          <h3 className="text-xl font-semibold text-gray-800 mb-3">{step.title}</h3>
+          <p className="text-gray-600">{step.description}</p>
+        </motion.div>
+      ))}
+    </motion.div>
+  </div>
   );
 };
 

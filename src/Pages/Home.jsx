@@ -9,20 +9,22 @@ import Footer from '../Components/Footer'
 import TestimonialsSlider from '../Components/TestimonialSlider'
 import HowItWorks from '../Components/HowItWorks'
 import { div } from 'framer-motion/client'
+import { Navbar } from '../Components/Navbar'
 
 const Home = () => {
   return (
 
     
     <div>
-         <Header/>
+         {/* <Header/> */}
+         {/* <Navbar/> */}
       <Hero/>
       <WhyTakeThisTest/>
       <HowItWorks/>
       <Big5Overview/>
       <Features/>
     <TestimonialsSlider/>
-    <Footer/>
+  
     </div>
   )
 }
