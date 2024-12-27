@@ -3,6 +3,7 @@ import './Hero.css'
 import {motion} from 'framer-motion'
 import { useSelector } from 'react-redux';
 import { FaHandPeace, FaRegHandPeace } from 'react-icons/fa';
+import { NavLink } from 'react-router-dom';
 
 
 const Hero = () => {
@@ -10,8 +11,8 @@ const Hero = () => {
   const {currentUser}=useSelector((state)=>state.user)
 
   return (
-    <section className="hero py-10  bg-slate-200">
-      <div className="container mx-auto flex mt-3 flex-col md:flex-row items-center justify-between">
+    <section className="hero py-10   bg-slate-200">
+      <div className="container mx-auto flex mt-3 flex-col  md:flex-row items-center justify-between">
         {/* Text Content */}
 
         { currentUser ?
@@ -41,12 +42,16 @@ const Hero = () => {
         Discover Your Personality <br /> with the Big Five Personality Test
       </h2>
     
-      <a
-        href="#take-test"
-        className="inline-block text-decoration-none bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded transition duration-300"
-      >
-        Take the Test Now
-      </a>
+      <NavLink
+  to="/instructions"
+  className={({ isActive }) =>
+    `inline-block text-decoration-none bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded transition duration-300 ${
+      isActive ? "bg-blue-700" : ""
+    }`
+  }
+>
+  Take the Test Now
+</NavLink>
       </motion.div>
         ):
          (
@@ -75,12 +80,16 @@ const Hero = () => {
             <strong> Openness, Conscientiousness, Extraversion, Agreeableness, </strong>
             and <strong>Neuroticism</strong>.
           </p>
-          <a
-            href="#take-test"
-            className="inline-block text-decoration-none  bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded transition duration-300"
-          >
-            Take the Test Now
-          </a>
+          <NavLink
+  to="/instructions"
+  className={({ isActive }) =>
+    `inline-block text-decoration-none bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded transition duration-300 ${
+      isActive ? "bg-blue-700" : ""
+    }`
+  }
+>
+  Take the Test Now
+</NavLink>
         </motion.div>
          )
         }

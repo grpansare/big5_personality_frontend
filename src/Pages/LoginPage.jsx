@@ -120,7 +120,8 @@ const LoginPage = () => {
 
             {/* Links */}
             <div className="login-links">
-              <a href="#" className="forgot-password">Forgot Password?</a>
+         
+              <NavLink to="/forgetpassword" className="text-blue-500 ml-2 font-bold">Forgot Password?</NavLink>
               
               <NavLink to="/signup" className="text-blue-500 ml-2 font-bold">New User ? Register Here</NavLink>
             </div>

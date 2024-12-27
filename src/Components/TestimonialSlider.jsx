@@ -94,11 +94,7 @@ const TestimonialsSlider = () => {
               {/* Author Section */}
               <div className="mt-8 border-t border-gray-300 pt-4">
                 <div className="flex items-center">
-                  <img
-                    className="h-10 w-10 flex-shrink-0 rounded-full object-cover"
-                    src={testimonial.profileImageUrl || 'https://via.placeholder.com/150'}
-                    alt={testimonial.name}
-                  />
+                 
                   <div className="ml-3 min-w-0">
                     <p className="truncate text-base font-semibold text-gray-800">{testimonial.name}</p>
                     <p className="truncate text-base text-gray-500">

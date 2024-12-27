@@ -15,7 +15,7 @@ const Home = () => {
   return (
 
     
-    <div>
+    <div className='mb-5'>
          {/* <Header/> */}
          {/* <Navbar/> */}
       <Hero/>

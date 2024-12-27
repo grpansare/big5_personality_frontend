@@ -223,12 +223,12 @@ function checkPassword(cpass,pass){
     
     return (
      
-        <div className="max-w-6xl mx-auto flex gap-2 flex-row justify-between p-4  border shadow  mt-5 ">
+        <div className="max-w-6xl mx-auto flex gap-2 flex-row justify-between   border shadow  mt-5 ">
              {/* Left Div */}
-             <div className="left hidden sm:flex flex-col justify-center items-center w-1/2">
+             <div className="left hidden bg-blue-50 sm:flex flex-col justify-center items-center w-1/2">
     <img
         className="object-contain"
-        style={{ height: "400px", width: "400px" }}
+        style={{ height: "400px", width: "400px",borderRadius:"40px" }}
         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdFqu5PwOjTwSuy-1VPrft72H0CAjP3HrzMQ&s"
         alt="Signup Illustration"
     />
@@ -239,7 +239,7 @@ function checkPassword(cpass,pass){
 
 
 
-            <div className="right flex flex-col md-p-6 p-4 md:w-1/2  w-full">
+            <div className="right flex flex-col md:p-6 p-5 md:w-1/2  w-full">
               <h1 className='text-2xl flex text-blue-500 font-semibold font-serif text-center flex-col  items-center gap-2 my-2'><FaBrain/>Big 5 <br />
               Personality Test</h1>
             <h1 className="text-3xl text-center font-semibold my-7">Sign Up</h1>

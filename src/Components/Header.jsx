@@ -2,27 +2,82 @@ import './Navbar.css'
 
 import React from 'react'
 import { Menu, X, ChevronDown, ChevronRight } from 'lucide-react'
-import { NavLink } from 'react-router-dom'
-import { FaArrowRight, FaBrain, FaEnvelope, FaHome, FaInfoCircle, FaSignInAlt } from 'react-icons/fa';
+import { NavLink, useNavigate } from 'react-router-dom'
+import { FaArrowRight, FaBrain, FaChevronDown, FaEnvelope, FaHome, FaInfoCircle, FaSignInAlt } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Dropdown } from 'react-bootstrap';
+import Swal from 'sweetalert2';
+import { Logout } from '../Store/UserSlice/UserSlice';
 
 
 
  function Header() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false)
   const {currentUser}=useSelector((state)=>state.user)
+  const dispatch=useDispatch()
+  const navigate=useNavigate()
   console.log(currentUser);
   
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
   }
+  const small_screen_logout=()=>{
+
+    toggleMenu()
+       Swal.fire({
+        title: 'Are you sure you want to logout?',
+        text: "You will be logged out of your account.",
+        icon: 'warning',
+        showCancelButton: true, // Display the cancel button
+        confirmButtonColor: '#3085d6', // Color for the confirm button
+        cancelButtonColor: '#d33',    // Color for the cancel button
+        confirmButtonText: 'Yes, Logout',
+        cancelButtonText: 'Cancel'
+    }).then((result) => {
+        if (result.isConfirmed) {
+          dispatch(Logout())
+            Swal.fire(
+                'Logged Out!',
+                'You have been logged out successfully.',
+                'success'
+            ).then(() => {
+                navigate('/'); // Navigate to login or home page
+            });
+        }
+    });
+  }
+  const logout=()=>{
+  
+      
+       Swal.fire({
+        title: 'Are you sure you want to logout?',
+        text: "You will be logged out of your account.",
+        icon: 'warning',
+        showCancelButton: true, // Display the cancel button
+        confirmButtonColor: '#3085d6', // Color for the confirm button
+        cancelButtonColor: '#d33',    // Color for the cancel button
+        confirmButtonText: 'Yes, Logout',
+        cancelButtonText: 'Cancel'
+    }).then((result) => {
+        if (result.isConfirmed) {
+          dispatch(Logout())
+            Swal.fire(
+                'Logged Out!',
+                'You have been logged out successfully.',
+                'success'
+            ).then(() => {
+                navigate('/'); // Navigate to login or home page
+            });
+        }
+    });
+    
+  }
 
   return (
-    <div className=" flex items-center  text-white  w-full bg-gray-700 " >
+    <div className=" flex items-center  text-white     w-full bg-gray-700 " >
  <div className="mx-auto flex border w-full px-4   items-center justify-between   h-full">
 
 
@@ -72,6 +127,9 @@ import { Dropdown } from 'react-bootstrap';
               </motion.li>
 
               {/* Take the Test */}
+
+              {currentUser && 
+               ( <>
               <motion.li
                 whileHover={{
                   scale: 1.1,
@@ -83,7 +141,7 @@ import { Dropdown } from 'react-bootstrap';
                 className="rounded"
               >
                 <NavLink
-                  to="/test"
+                  to="/test-results"
                   className="text-white d-flex justify-content-center align-items-center rounded px-2 py-2"
                   style={{ textDecoration: "none" }}
                 >
@@ -91,12 +149,35 @@ import { Dropdown } from 'react-bootstrap';
                   <FaArrowRight className="ms-2" />
                 </NavLink>
               </motion.li>
-
+              
+              
+                <motion.li
+                whileHover={{
+                  scale: 1.1,
+                  background: "linear-gradient(90deg, #43cea2, #185a9d)",
+                  color: "#fff",
+                  transition: { duration: 0.3 },
+                }}
+                whileTap={{ scale: 0.95, transition: { duration: 0.1 } }}
+                className="rounded"
+              >
+                <NavLink
+                  to="/instructions"
+                  className="text-white d-flex justify-content-center align-items-center rounded px-2 py-2"
+                  style={{ textDecoration: "none" }}
+                >
+                 Take the test
+                  <FaArrowRight className="ms-2" />
+                </NavLink>
+              </motion.li>
+              </>
+               )
+               }
               
 
              
 
-              {/* Contact Us */}
+              {/* Contact Us
               <motion.li
                 whileHover={{
                   scale: 1.1,
@@ -114,34 +195,47 @@ import { Dropdown } from 'react-bootstrap';
                 >
                   <FaEnvelope className="me-2" /> Contact Us
                 </NavLink>
-              </motion.li>
+              </motion.li> */}
 
               {currentUser ?  (<li
               
                 className="rounded"
               >
      <Dropdown>
-     <Dropdown.Toggle
+  
+
+<Dropdown.Toggle
   variant=""
   id="dropdown-basic"
   bsPrefix="custom-dropdown-toggle" // Custom class to override default styles
-  className="flex items-center   gap-2 p-0 bg-transparent border-0"
+  className="flex items-center gap-2 p-0 bg-transparent border-0"
 >
-  <div className="rounded-full  py-2 px-3 bg-blue-300 text-black font-bold flex justify-center items-center">
-     {/* {currentUser?.fullname?.split(" ")[0].charAt(0)}{currentUser.fullname.split(" ")[1].charAt(0)}  */}
+  <div className="rounded-full py-2 px-3 bg-blue-300 text-black font-bold flex justify-center items-center">
+    {currentUser?.fullname?.split(" ")[0].charAt(0)}
+    {currentUser?.fullname?.split(" ")[1]?.charAt(0)}
+    <svg
+  xmlns="http://www.w3.org/2000/svg"
+  className="w-4 h-4 text-gray-600"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke="currentColor"
+>
+  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+</svg>
   </div>
 </Dropdown.Toggle>
+
 
 
 
       <Dropdown.Menu>
         <Dropdown.Item >
 
-          <NavLink to="/userprofile">
+          <NavLink to="/userprofile" className="text-decoration-none text-black">
                 Profile
           </NavLink>
         </Dropdown.Item>
-        <Dropdown.Item 
+        <Dropdown.Item  onClick={()=>{logout()}}
         >Logout</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
@@ -184,7 +278,7 @@ import { Dropdown } from 'react-bootstrap';
           <Menu onClick={toggleMenu} className="h-6 w-6 cursor-pointer" />
         </div>
         {isMenuOpen && (
-          <div className="absolute inset-x-0 top-0 z-50 origin-top-right transform p-2 transition lg:hidden">
+          <div className="absolute inset-x-0 top-0 z-50 origin-top-right transform p-2  transition lg:hidden">
             <div className="divide-y-2 divide-gray-50 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
               <div className="px-5 pb-6 pt-5">
                 <div className="flex items-center justify-between">
@@ -203,14 +297,14 @@ import { Dropdown } from 'react-bootstrap';
                     </button>
                   </div>
                 </div>
-                <div className="mt-6">
+                <div className="mt-6 text-black">
                   <nav className="grid gap-y-4">
                   
          
                 <NavLink
                   to="/"
                   onClick={toggleMenu}
-                  className=" d-flex justify-content-center align-items-center rounded px-3 py-2"
+                  className=" d-flex justify-content-center text-black align-items-center rounded px-3 py-2"
                   style={{ textDecoration: "none" }}
                 >
                   <FaHome className="me-2" /> Home
@@ -221,7 +315,7 @@ import { Dropdown } from 'react-bootstrap';
                 <NavLink
                   to="/about"
                   onClick={toggleMenu}
-                  className=" d-flex justify-content-center align-items-center rounded px-3 py-2"
+                  className=" d-flex justify-content-center text-black  align-items-center rounded px-3 py-2"
                   style={{ textDecoration: "none" }}
                 >
                   <FaInfoCircle className="me-2" /> About the test
@@ -229,9 +323,9 @@ import { Dropdown } from 'react-bootstrap';
              
 
                 <NavLink
-                  to="/test"
+                  to="/instructions"
                   onClick={toggleMenu}
-                  className=" d-flex justify-content-center align-items-center rounded px-2 py-2"
+                  className=" d-flex justify-content-center text-black  align-items-center rounded px-2 py-2"
                   style={{ textDecoration: "none" }}
                 >
                   Take the Test
@@ -243,14 +337,7 @@ import { Dropdown } from 'react-bootstrap';
 
              
 
-                <NavLink
-                  to="/contact"
-                  onClick={toggleMenu}
-                  className=" d-flex justify-content-center align-items-center rounded px-3 py-2"
-                  style={{ textDecoration: "none" }}
-                >
-                  <FaEnvelope className="me-2" /> Contact Us
-                </NavLink>
+              
            
              
          
@@ -259,7 +346,28 @@ import { Dropdown } from 'react-bootstrap';
                   </nav>
                 </div>
 
-                {currentUser ? "userprofile" :
+                {currentUser ?
+                 (
+                  <>
+                  <NavLink
+                  to="/userprofile"
+                  onClick={toggleMenu}
+                  className=" d-flex justify-content-center align-items-center rounded px-3 py-2"
+                  style={{ textDecoration: "none" }}
+                >
+                  <FaEnvelope className="me-2" /> Profile
+                </NavLink>
+                 <NavLink
+                 to="/logout"
+               
+                 onClick={small_screen_logout}
+                 className=" d-flex justify-content-center align-items-center rounded px-3 py-2"
+                 style={{ textDecoration: "none" }}
+               >
+                 <FaEnvelope className="me-2" /> Profile
+               </NavLink>
+                     </>
+                ) :
                 (
                 <div className="mt-2 space-y-2">
                   <Button

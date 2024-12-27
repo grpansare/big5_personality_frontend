@@ -14,6 +14,14 @@ import LoginPage from './Pages/LoginPage';
 import ContactUs from './Pages/ContactUs';
 import Homepage from './Pages/Homepage';
 import ProfilePage from './Pages/ProfilePage';
+import Question from './Components/Question';
+import TestPage from './Pages/TestPage';
+import Instructions from './Components/Instructions';
+import ForgotPassword from './Pages/ForgetPassword';
+import ResultPage from './Pages/ResultPage';
+import PrivateRoute from './Components/PrivateRoute';
+import ChangePassword from './Pages/ChangePassword';
+import TestResult from './Pages/TestResults';
 
 
 const App = () => {
@@ -29,9 +37,18 @@ const App = () => {
       
       <Route path='/contact' element={<ContactUs/>}/>
       <Route path='/userprofile' element={<ProfilePage/>}/>
+      {/* <Route path='/instructions' element={<Instructions/>}/> */}
+      <Route path='/take-test' element={<TestPage/>}/>
+      <Route path='/test-results' element={<TestResult/>}/>
+      <Route path='/result' element={<ResultPage/>}/>
       </Route>
       <Route path='/signup' element={<Signup/>}/>
       <Route path='/Login' element={<LoginPage/>}/>
+      <Route path='/changepassword' element={<ChangePassword/>}/>
+      <Route path='/forgetpassword' element={<ForgotPassword/>}/>
+      <Route element={<PrivateRoute/>}>
+     <Route path='/instructions' element={<Instructions/>}/>
+     </Route>
     </Routes>
    
      

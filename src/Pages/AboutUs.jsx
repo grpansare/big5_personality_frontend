@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaHandshake, FaGlobe, FaUsers, FaTrophy } from 'react-icons/fa';
+import { FaHandshake, FaGlobe, FaUsers, FaTrophy, FaChartLine, FaUserCheck, FaRegLightbulb } from 'react-icons/fa';
 import Corousel from '../Components/carousel';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
@@ -37,24 +37,60 @@ const AboutUs = () => {
     <>
        {/* <Header/> */}
     <Corousel/>
-    <div className="w-full px-6 py-12 bg-gray-50">
-      <div className="max-w-5xl mx-auto text-center">
-        <h1 className="text-4xl font-bold text-gray-800 mb-6">About Us</h1>
-        <p className="text-gray-600 mb-8">
-          We are a passionate team dedicated to helping individuals better understand themselves through the lens of
-          personality science. Our mission is to make self-awareness accessible to everyone, empowering personal growth
-          and fostering meaningful connections.
-        </p>
+    <div className="w-full  py-12 mb-5 bg-gray-50">
+      <div className="w-full mt-3 bg-slate-100 mb-5  p-3 flex border   text-center">
+      <div className="aboutus my-3 max-w-8xl md:max-w-5xl flex flex-col md:flex-row mx-auto">
+  {/* Image Section */}
+  <div className="image-div w-full md:w-1/2 p-2">
+    <img
+      className="w-full rounded-lg h-64 md:h-96 object-cover"
+      src="/public/aboutus2.jfif"
+      alt="About Us"
+    />
+  </div>
+
+  {/* Text Section */}
+  <div className="right w-full md:w-1/2 p-4 flex flex-col justify-center">
+    <h1 className="text-3xl md:text-4xl font-mono   text-start font-extrabold   text-gray-700 mb-4 md:mb-6">
+      About Us
+    </h1>
+    <p className="text-gray-600 mb-6 md:mb-8 text-start">
+      We are a passionate team dedicated to helping individuals better understand themselves through the lens of
+      personality science. Our mission is to make self-awareness accessible to everyone, empowering personal growth
+      and fostering meaningful connections.
+    </p>
+  </div>
+</div>
+
       </div>
 
       {/* Mission Section */}
-      <div className="max-w-6xl mx-auto text-center mb-12">
-        <h2 className="text-3xl font-semibold text-gray-800 mb-4">Our Mission</h2>
-        <p className="text-gray-600">
-          To provide reliable, insightful, and user-friendly personality assessments that inspire individuals to
-          discover their unique traits and achieve their fullest potential.
-        </p>
-      </div>
+    
+
+<div className="max-w-6xl mt-6 mx-auto mb-12">
+  <h2 className="text-3xl font-semibold text-gray-800 mb-4 flex justify-center items-center">
+    <FaRegLightbulb className="text-yellow-500 mr-2" /> Our Mission
+  </h2>
+  <div className="flex flex-col gap-3 max-w-4xl mx-auto md:flex-row items-center md:items-start text-center md:text-left">
+    <div className="flex-1 px-4 py-5 mb-6 shadow-md md:mb-0 bg-white border">
+      <FaUserCheck className="text-blue-500 text-4xl mx-auto mb-4" />
+      <p className="text-gray-600 text-lg font-semibold">
+        To provide reliable, insightful, and user-friendly personality assessments that inspire individuals to 
+        discover their unique traits and achieve their fullest potential.
+      </p>
+    </div>
+    <div className="flex-1 px-5 bg-white py-4 shadow-md border">
+      <FaChartLine className="text-green-500 text-4xl mx-auto mb-4" />
+      <p className="text-gray-600 text-lg font-semibold">
+        We are dedicated to fostering self-awareness and growth through scientifically grounded methodologies 
+        and innovative tools. By empowering individuals with meaningful insights, we aim to support their personal 
+        and professional journeys.
+      </p>
+    </div>
+  </div>
+</div>
+
+
 
       {/* Values Section */}
       <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
