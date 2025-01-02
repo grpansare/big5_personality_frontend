@@ -61,7 +61,7 @@ const navigate = useNavigate();
     
     
     const loginWithGoogle = () => {
-        window.open('http://localhost:6006/auth/google/callback', '_self');
+        window.open('https://big5-personality-backend-1.onrender.com/auth/google/callback', '_self');
     };
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -85,7 +85,7 @@ const navigate = useNavigate();
         }
 
         try {
-            const res = await axios.post('http://localhost:6006/user/signup', formData);
+            const res = await axios.post('https://big5-personality-backend-1.onrender.com/user/signup', formData);
             if (res.data.success) {
                 Swal.fire('Success', 'Registered successfully!', 'success').then(() => {
                     navigate('/login');

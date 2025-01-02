@@ -24,7 +24,7 @@ const LoginPage = () => {
     e.preventDefault();
      
     try {
-        const res = await axios.post('http://localhost:6006/user/signin', formData,{ withCredentials: true });
+        const res = await axios.post('https://big5-personality-backend-1.onrender.com/user/signin', formData,{ withCredentials: true });
         console.log(res);
          
         if (res.data.success) {

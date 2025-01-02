@@ -132,7 +132,7 @@ const ResultPage = () => {
     };
 
     try {
-      const response = await axios.post('http://localhost:6006/result/save-result', resultData);
+      const response = await axios.post('https://big5-personality-backend-1.onrender.com/result/save-result', resultData);
 
       // Show success message
       setSnackbarMessage(response.data.message || 'Result saved successfully!');

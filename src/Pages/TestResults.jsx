@@ -37,7 +37,7 @@ const TestResult = () => {
   const getResults = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:6006/result/get-results/${currentUser.username}`
+        `https://big5-personality-backend-1.onrender.com/result/get-results/${currentUser.username}`
       );
       if (response.data.results) {
         setResults(response.data.results);
