@@ -154,67 +154,76 @@ const handleSnackbarClose = () => {
   
 
   return (
-    <div className="flex flex-col items-center">
-        <Snackbar
-        open={snackbarOpen}
-        autoHideDuration={4000} // Closes after 4 seconds
-        onClose={handleSnackbarClose}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-      >
-        <Alert onClose={handleSnackbarClose} severity={snackbarSeverity} sx={{ width: '100%' }}>
-          {snackbarMessage}
-        </Alert>
-      </Snackbar>
-      <div className="border-2  mt-5 p-4  rounded-lg shadow-lg">
-        <h2>Your Personality Trait Score</h2>
-        <div className="result flex items-center justify-center max-w-7xl">
-          <div className="w-50 border-4 flex justify-center p-3">
-        <BarChart
-          dataset={chartData}
-          series={[
-            {
-              dataKey: 'value',
-              label: 'Percentage (%)',
-              dataLabel: {
-                position: 'end',
-                formatter: (value) => `${value.toFixed(0)}%`,
-                style: {
-                  fontSize: 14,
-                  fill: '#000',
-                  fontWeight: 'bold',
+    <div className="flex flex-col w-full mb-5 items-center">
+    <Snackbar
+      open={snackbarOpen}
+      autoHideDuration={4000} // Closes after 4 seconds
+      onClose={handleSnackbarClose}
+      anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+    >
+      <Alert onClose={handleSnackbarClose} severity={snackbarSeverity} sx={{ width: '100%' }}>
+        {snackbarMessage}
+      </Alert>
+    </Snackbar>
+  
+    <div className="result border-4 md:mt-5 mt-3 p-4 rounded-lg shadow-lg max-w-7xl w-full">
+      <h2 className="text-center text-xl font-bold mb-4">Your Personality Trait Score</h2>
+      <div className="flex flex-col md:flex-row items-center justify-between gap-6 mx-auto">
+        {/* Bar Chart Section */}
+        <div className="w-full md:w-1/2 border-4 rounded-lg shadow-md flex justify-center p-4 bg-white">
+          <BarChart
+            dataset={chartData}
+            series={[
+              {
+                dataKey: 'value',
+                label: 'Percentage (%)',
+                dataLabel: {
+                  position: 'end',
+                  formatter: (value) => `${value.toFixed(0)}%`,
+                  style: {
+                    fontSize: 14,
+                    fill: '#000',
+                    fontWeight: 'bold',
+                  },
                 },
               },
-            },
-          ]}
-          layout="horizontal"
-          {...chartSetting}
-        />
+            ]}
+            layout="horizontal"
+            {...chartSetting}
+          />
         </div>
-        <div className="desc w-50 p-4 font-semibold">
-      <p>{getDescription("Openness",openness)}
-    {getDescription("Extraversion",extraversion)}
-      {getDescription("Conscientiousness",conscientiousness)}
-    {getDescription("Agreeableness",agreeableness)}
-    {getDescription("Neuroticism",neuroticism)}</p>
-
-    <div className="button">
-    <Button 
-        variant="contained" 
-        color="primary" 
-        onClick={saveresult}
-      >
-        Save Result
-      </Button>
-    </div>
-    </div>
-    </div>
+  
+        {/* Description Section */}
+        <div className="desc w-full md:w-1/2 p-4 font-semibold bg-gray-50 rounded-lg shadow-md">
+          <p className="mb-4">
+            {getDescription("Openness", openness)}
+            {getDescription("Extraversion", extraversion)}
+            {getDescription("Conscientiousness", conscientiousness)}
+            {getDescription("Agreeableness", agreeableness)}
+            {getDescription("Neuroticism", neuroticism)}
+          </p>
+          <div className="button flex justify-center">
+            <Button 
+              variant="contained" 
+              color="primary" 
+              onClick={saveresult}
+            >
+              Save Result
+            </Button>
+          </div>
+        </div>
       </div>
-      
-      <Suggestions   openness={openness} extraversion={extraversion}  conscientiousness={conscientiousness}  neuroticism={neuroticism}
-
-agreeableness={agreeableness}
-      />
     </div>
+  
+    <Suggestions
+      openness={openness}
+      extraversion={extraversion}
+      conscientiousness={conscientiousness}
+      neuroticism={neuroticism}
+      agreeableness={agreeableness}
+    />
+  </div>
+  
   );
 };
 

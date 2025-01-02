@@ -10,10 +10,12 @@ import {
 import { app } from './firebase';
 import axios from 'axios'
 
+import { Client } from 'appwrite';
+
 const ProfilePage = () => {
   const {currentUser}=useSelector((state)=>state.user)
   const [profile, setProfile] = useState(currentUser);
-
+ 
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState(currentUser);
   const [image, setImage] = useState(undefined);
@@ -29,27 +31,29 @@ const ProfilePage = () => {
 
   };
   const handleFileUpload = async (image) => {
-    const storage = getStorage(app);
-    const fileName = new Date().getTime() + image.name;
-    const storageRef = ref(storage, fileName);
-    const uploadTask = uploadBytesResumable(storageRef, image);
-    uploadTask.on(
-      'state_changed',
-      (snapshot) => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        // setImagePercent(Math.round(progress));
-      },
-      (error) => {
-        setImageError(true);
-      },
-      () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) =>
-          setFormData({ ...formData, profilePicture: downloadURL })
-        );
-      }
-    );
+    const formData = new FormData();
+    formData.append('file', image);
+    alert("Handle fule upload")
+  
+    try {
+      const response = await axios.put(`http://localhost:6006/user/upload/${currentUser._id}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      
+      const { filePath } = response.data;
+      const imageUrl = `http://localhost:6006/${filePath}`;
+      
+      
+      // Update profile picture URL in formData
+      setFormData({ ...formData, profilePicture: imageUrl});
+    
+    } catch (error) {
+      console.error('Error uploading file:', error.message);
+    }
   };
+  
   const handleUpdate = async () => {
     try {
       console.log(currentUser);
@@ -83,7 +87,7 @@ const ProfilePage = () => {
       <div className="profile-container">
         <div className="profile-pic-container">
           <img
-            src={formData.profilePicture|| "images.jpeg"}
+            src={`http://localhost:6006/${currentUser?.profilePicture}`|| "images.jpeg"||formData?.profilePicture}
             alt="Profile"
             className="profile-pic"
           />

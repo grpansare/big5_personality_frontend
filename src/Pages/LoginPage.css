@@ -139,22 +139,29 @@ h2 {
 
 @media (max-width: 1024px) {
   .login-content {
-    flex-direction: column; 
+    flex-direction: column;
+    width: 100%; 
+  }
+  .login-container{
+    padding:0;
   }
 
   .image-section {
-    height: 200px; 
+    height: 40vh; 
+    /* border: 1px solid black; */
+    
   }
 
   .welcome-image {
     width: 100%;
-    height: 100%;
+    height: 10%;
     object-fit: cover;
     object-position: center;
   }
 
   .form-section {
     padding: 20px;
+    font-size: 1rem;
   }
 
   h1 {
@@ -215,5 +222,17 @@ h2 {
   .login-button {
     font-size: 0.7rem;
     padding: 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  .welcome-image {
+    height: 20%; /* Reduce height for medium screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .welcome-image {
+    height: 15%; /* Further reduce height for small screens */
   }
 }

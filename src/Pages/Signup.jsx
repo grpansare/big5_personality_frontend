@@ -22,9 +22,8 @@ const Signup = () => {
     password: "",
     cpassword:""
 });
-
-    const [error,setError]=useState({errortype:"",errormsg:""})
-    const navigate = useNavigate();
+const [errors, setErrors] = useState({});
+const navigate = useNavigate();
     const URL='http://localhost:6006/user/signup'
 
  
@@ -39,188 +38,78 @@ const Signup = () => {
       event.preventDefault();
     };
  
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        
-    validateFirstname(formData.firstname || "");
-    validateLastname(formData.lastname || "");
-    validateEmail(formData.email || "");
-    validatePassword(formData.password || "");
-
-    // Check if there are any errors
-    if (error.errortype) {
-        Swal.fire("Error", "Please correct the errors before submitting.", "error");
-        return;
-    }
-        try {
-            const res=await axios.post('http://localhost:6006/user/signup',formData)
-            console.log(res);
-            
-            if(res.data.success){
-              Swal.fire({
-                title: 'Registered Successfully!',
-                text: 'You have been registered. Redirecting to sign-in...',
-                icon: 'success',
-                confirmButtonText: 'OK'
-            }).then(() => {
-                navigate('/login');  // Navigate to sign-in after the alert is closed
-            });
-           
+    const validators = {
+        firstname: (value) => {
+            if (!value || value.trim() === '') {
+                return 'First name is required.';
             }
-            
-            
-        } catch (err) {
-            // dispatch(signInFailure(err));
-        }
-        
-      
-      
+            return /^[A-Z]/.test(value) ? '' : 'First name should start with a capital letter.';
+        },
+        lastname: (value) => {
+            if (!value || value.trim() === '') {
+                return 'Last name is required.';
+            }
+            return /^[A-Z]/.test(value) ? '' : 'Last name should start with a capital letter.';
+        },
+        email: (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) ? '' : 'Invalid email format.',
+        phoneno: (value) => /^(\+91[\-\s]?)?[6-9]\d{9}$/.test(value) ? '' : 'Invalid phone number.',
+        username: (value) => value && value.length >= 5 ? '' : 'Username must be at least 5 characters long.',
+        password: (value) => value && value.length >= 8 ? '' : 'Password must be at least 8 characters long.',
+        age: (value) => value > 0 && value <= 150 ? '' : 'Age must be between 1 and 150.',
+        cpassword: (value, password) => value === password ? '' : 'Passwords do not match.',
     };
-
+    
+    
     const loginWithGoogle = () => {
         window.open('http://localhost:6006/auth/google/callback', '_self');
     };
-    const handleChange=(e)=>{
-         const {name,value}=e.target
-         setFormData((prev)=>({
-            ...prev,[name]:value
-         }))
-         if (name === "firstname") {
-          validateFirstname(value);
-      }else if (name === "lastname") {
-        validateLastname(value);
-    } else if (name === "email") {
-        validateEmail(value);
-    } else if (name === "password") {
-        validatePassword(value);
-    }
-     else if (name === "phoneno") {
-        validatePhoneNumber(value);
-    }
-    else if(name==="cpassword"){
-          checkPassword(value,formData.password)
-    }
-    else if(name==="username"){
-        validateUsername(value)
-    }
-    else if(name==="age"){
-        validateAge(value)
-    }
-    else if(name==="designation"){
-        validateDesignation(value)
-    }
-        
-    }
-   
-  function validateFirstname(value) {
-    if (!value.trim()) {
-        setError({ errortype: "firstname", errormsg: "First name is required." });
-    } else if (!/^[A-Z]/.test(value)) {
-        setError({ errortype: "firstname", errormsg: "First name should start with a capital letter." });
-    } else {
-        clearError("firstname");
-    }
-}
- 
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+        validateField(name, value);
+    };
+    const validateField = (name, value) => {
+        const errorMsg = validators[name]
+            ? validators[name](value, formData.password)
+            : '';
+        setErrors((prev) => ({ ...prev, [name]: errorMsg }));
+    };
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const isValid = Object.values(errors).every((err) => !err) &&
+            Object.values(formData).every((field) => field.trim());
 
-function validateLastname(value) {
-    if (!value.trim()) {
-        setError({ errortype: "lastname", errormsg: "Last name is required." });
-    }else if (!/^[A-Z]/.test(value)) {
-      setError({ errortype: "lastname", errormsg: "last name should start with a capital letter." });
-  } else {
-        clearError("lastname");
-    }
-}
+        if (!isValid) {
+            Swal.fire('Error', 'Please fix all errors before submitting.', 'error');
+            return;
+        }
 
-function validateEmail(value) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!value.trim()) {
-        setError({ errortype: "email", errormsg: "Email is required." });
-    } else if (!emailRegex.test(value)) {
-        setError({ errortype: "email", errormsg: "Invalid email format." });
-    } else {
-        clearError("email");
-    }
-}
-function validatePhoneNumber(value) {
-    const phoneRegex =/^(\+91[\-\s]?)?[6-9]\d{9}$/
-
-    ;
-    if (!value.trim()) {
-        setError({ errortype: "phoneno", errormsg: "Phone number is required." });
-    } else if (!phoneRegex.test(value)) {
-        setError({ errortype: "phoneno", errormsg: "Invalid phone number format." });
-    } else {
-        clearError("phoneno");
-    }
-}
-function validateUsername(value){
-    if (!value.trim()) {
-        setError({ errortype: "username", errormsg: "Username is required." });
-    } 
-    else if(value.length <5){
-        setError({errortype:"username",errormsg:"Username must be at least 5 characters long"})
-    }
-    else{
-        clearError("username")
-    }
-}
-function validateDesignation(value){
-    if (!value.trim()) {
-        setError({ errortype: "designation", errormsg: "designation is required." });
-    } 
-  
-    else{
-        clearError("designation")
-    }
-}
-function validateAge(value) {
-    value = Number.parseInt(value);
+        try {
+            const res = await axios.post('http://localhost:6006/user/signup', formData);
+            if (res.data.success) {
+                Swal.fire('Success', 'Registered successfully!', 'success').then(() => {
+                    navigate('/login');
+                });
+            }
+        } catch (err) {
+            Swal.fire('Error', err.response?.data?.message || 'Something went wrong.', 'error');
+        }
+    };
+    const isFormValid = () => {
+        return (
+            !error.errortype && // No errors
+            formData.firstname.trim() &&
+            formData.lastname.trim() &&
+            formData.email.trim() &&
+            formData.username.trim() &&
+            formData.password.trim() &&
+            formData.cpassword.trim() &&
+            formData.password === formData.cpassword // Confirm password matches
+        );
+    };
     
-    if (!value && value !== 0) {
-        setError({ errortype: "age", errormsg: "Age is required." });
-    } else if (value <= 0 || value > 150) {
-        setError({ errortype: "age", errormsg: "Please enter a valid age." });
-    } else {
-        clearError("age");
-    }
-}
 
-function validatePassword(value) {
-    if (value.length < 8) {
-        
-        setError({ errortype: "password", errormsg: "Password must be at least 8 characters long." });
-       
-    } else {
-        clearError("password");
-    }
-}
 
-function clearError(field) {
-    setError((prev) => (prev.errortype === field ? { errortype: "", errormsg: "" } : prev));
-}
-function checkPassword(cpass,pass){
-   if (cpass.length < 8){
-
-       setError({ errortype: "cpassword", errormsg: "Password must be at least 8 characters long." });
-   }
-   else if(cpass !== pass){
-   
-    setError({ errortype: "cpassword", errormsg: "Password does not matched" });
-   }
-   else {
-    clearError("cpassword");
-}
-}
-
-  function isFirstCharCapital(str) {
-      if(str==""){
-        return false
-      }
-      return /^[A-Z]/.test(str);
-  }
-    
     return (
      
         <div className="max-w-6xl mx-auto flex gap-2 flex-row justify-between   border shadow  mt-5 ">
@@ -258,9 +147,10 @@ function checkPassword(cpass,pass){
                         id="outlined-email"
                         label="First name"
                         className="w-full"
-                        error={error?.errortype === "firstname"}
+                        error={!!errors.firstname}
+                        helperText={errors.firstname}
                         name="firstname"
-                        helperText={error?.errortype == 'firstname' ? error.errormsg : ""}
+                        
                         variant="outlined"
                         slotProps={{
                             input: {
@@ -275,8 +165,8 @@ function checkPassword(cpass,pass){
                         label="Last name"
                         className="w-full"
                         name="lastname"
-                        helperText={error?.errortype == 'lastname' ? error.errormsg : ""}
-                        error={error?.errortype === "lastname"}
+                        error={!!errors.lastname}
+                helperText={errors.lastname}
                         slotProps={{
                             input: {
                               endAdornment: <InputAdornment position="start"><FaUser/></InputAdornment>,
@@ -294,8 +184,8 @@ function checkPassword(cpass,pass){
                         label="Email"
                         className="w-full"
                         name="email"
-                        helperText={error?.errortype == 'email' ? error.errormsg : ""}
-                        error={error?.errortype === "email"}
+                        error={!!errors.email}
+                helperText={errors.email}
                         variant="outlined"
                         slotProps={{
                             input: {
@@ -312,8 +202,8 @@ function checkPassword(cpass,pass){
                         label="Phone Number"
                         className="w-1/2"
                         name="phoneno"
-                        helperText={error?.errortype == 'phoneno' ? error.errormsg : ""}
-                        error={error?.errortype === "phoneno"}
+                        error={!!errors.phoneno}
+                        helperText={errors.phoneno}
                         variant="outlined"
                         slotProps={{
                             input: {
@@ -328,8 +218,8 @@ function checkPassword(cpass,pass){
           defaultValue="Student"
           name="designation"
           onChange={handleChange}
-          helperText={error?.errortype == 'designation' ? error.errormsg : ""}
-          error={error?.errortype === "designation"}
+          error={!!errors?.designation}
+                helperText={errors?.designation}
           
         >
         
@@ -352,10 +242,11 @@ function checkPassword(cpass,pass){
                         type="text"
                         id="outlined-email"
                         label="username"
-                        error={error?.errortype === "username"}
+                        
                         className="w-full"
                         name="username"
-                        helperText={error?.errortype == "username"?error.errormsg :""}
+                        error={!!errors?.username}
+                        helperText={errors?.username}
                         variant="outlined"
                         slotProps={{
                             input: {
@@ -371,10 +262,11 @@ function checkPassword(cpass,pass){
                         type="text"
                         id="outlined-email"
                         label="age"
-                        error={error?.errortype === "age"}
+                   
                         className="w-full"
                         name="age"
-                        helperText={error?.errortype == "age"?error.errormsg :""}
+                        error={!!errors.age}
+                        helperText={errors.age}
                         variant="outlined"
                         slotProps={{
                             input: {
@@ -387,7 +279,7 @@ function checkPassword(cpass,pass){
      <FormControl
     sx={{ m: 1, width: '96%' }}
     variant="outlined"
-    error={error.errortype === "password"} // Highlights the input if there's a password error
+    error={!!errors.password} // Highlights the input if there's a password error
 >
     <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
     <OutlinedInput
@@ -411,15 +303,16 @@ function checkPassword(cpass,pass){
         }
         label="Password"
     />
-    {error.errortype === "password" && (
-        <FormHelperText>{error.errormsg} </FormHelperText> // This will display the error message
+    
+    {!!errors.password && (
+        <FormHelperText>{errors.password} </FormHelperText> // This will display the error message
         
     )}
              </FormControl>
      <FormControl
     sx={{ m: 1, width: '96%' }}
     variant="outlined"
-    error={error.errortype === "cpassword"} // Highlights the input if there's a password error
+    error={!!errors.cpassword} // Highlights the input if there's a password error
 >
     <InputLabel htmlFor="outlined-adornment-password">Confirm Password</InputLabel>
     <OutlinedInput
@@ -443,8 +336,8 @@ function checkPassword(cpass,pass){
         }
         label="Confirm Password"
     />
-    {error.errortype === "cpassword"  && (
-        <FormHelperText>{error.errormsg} </FormHelperText> // This will display the error message
+    {!!errors.cpassword  && (
+        <FormHelperText>{errors.cpassword} </FormHelperText> // This will display the error message
         
     )}
 </FormControl>
@@ -452,7 +345,7 @@ function checkPassword(cpass,pass){
 
 
                 </div>
-                <button disabled={error.errortype ? true:false}  className="bg-slate-700 relative   text-white p-3 mx-auto rounded-lg uppercase hover:opacity-95 disabled:opacity-80 w-full mt-4">
+                <button disabled={isFormValid}  className="bg-slate-700 relative   text-white p-3 mx-auto rounded-lg uppercase hover:opacity-95 disabled:opacity-80 w-full mt-4">
               
             Sign Up
          
@@ -465,13 +358,13 @@ function checkPassword(cpass,pass){
              
             </div>
             </Box>
-            <div className="login-google text-center">
+            {/* <div className="login-google text-center">
                 <p>or</p>
                
                 <button onClick={loginWithGoogle}   className="  relative border-2 flex justify-center items-center gap-2  p-3 mx-auto rounded-lg uppercase hover:opacity-95 disabled:opacity-80 w-80 mt-4">
                 <FcGoogle  className="me-2" size={28}/>  Continue with google
                 </button>
-              </div>
+              </div> */}
           
         </div>
         </div>

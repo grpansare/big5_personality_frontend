@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import './Results.css'
 import {
   Table,
   TableBody,
@@ -105,8 +106,8 @@ const TestResult = () => {
       <Typography variant="h5" className="text-center" gutterBottom>
         Test Results
       </Typography>
-      <div className="result-table w-full h-full flex justify-center flex-col items-center">
-        <TableContainer component={Paper} className="w-50">
+      <div className="  flex  justify-center flex-col items-center">
+        <TableContainer component={Paper} className="result-table">
           <Table>
             <TableHead sx={{ backgroundColor: "#aec6cf" }}>
               <TableRow>
@@ -184,7 +185,7 @@ const TestResult = () => {
           {...chartSetting}
         />
         </div>
-        <div className="desc w-50 p-4 font-semibold">
+        <div className="desc w-full md:w-50 p-4 font-semibold">
       <p>{getDescription("Openness",selectedResult.openness)}
     {getDescription("Extraversion",selectedResult.extraversion)}
       {getDescription("Conscientiousness",selectedResult.conscientiousness)}

@@ -3,6 +3,7 @@ import Question from '../Components/Question';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setUserAnswers } from '../Store/UserSlice/UserSlice';
+import { Alert } from '@mui/material';
 
 
 const TestPage = () => {
@@ -10,6 +11,7 @@ const TestPage = () => {
   const [counter,setCounter]=useState(0)
   const dispatch=useDispatch()
   const navigate=useNavigate()
+  const [showAlert, setShowAlert] = useState(false);
  
   console.log(counter);
   const handleAnswerChange = (id, answer, questionType,personalityTrait) => {
@@ -55,10 +57,12 @@ const TestPage = () => {
     if (allAnswered) {
       setCounter((prev) => prev + 3);
       scrollToTop();
+      setShowAlert(false)
      
       
     } else {
-      alert("Please answer all questions before proceeding.");
+      scrollToTop();
+      setShowAlert(true)
     }
   };
   
@@ -66,12 +70,21 @@ const TestPage = () => {
     setCounter((prev)=>prev-3)
     scrollToTop()
   }
+ 
+
+ 
 
   return (
-    <div className="w-full flex justify-center my-5">
+    <div className="w-full flex  flex-col justify-center my-5">
+     {showAlert && (
+      <Alert severity="warning" onClose={() => setShowAlert(false)}>
+        Please answer all questions before proceeding!
+      </Alert>
+    )}
+
     <div className='md:w-1/2 w-96  border-1 p-5  shadow-lg'>
       <h4 className='text-center mb-5'>Personality Questionnaire</h4>
-      <div className="questions mx-auto p-4">
+      <div className="questions mx-auto ">
       <Question q={questions[counter]} answers={answers} scrollToNextQue={scrollToNextQue}  handleAnswerChange={handleAnswerChange}/>
       <Question q={questions[counter+1]} answers={answers} scrollToNextQue={scrollToNextQue}  handleAnswerChange={handleAnswerChange}/>
       {questions[counter+2] && <Question q={questions[counter+2]} answers={answers} scrollToNextQue={scrollToNextQue}   handleAnswerChange={handleAnswerChange}/>}

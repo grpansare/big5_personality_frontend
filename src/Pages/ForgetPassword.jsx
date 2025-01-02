@@ -143,7 +143,7 @@ const ForgotPassword = () => {
         <div className="text-center">
           <form className="rounded bg-white p-5" onSubmit={handleOtpSubmit}>
             <h3 className="text-dark fw-bolder fs-4 mb-2">
-              Two Step Verification
+           Otp Verification
             </h3>
             <div className="fw-normal text-muted mb-4">
               An OTP has been sent to <b>{email}</b>. Please check your inbox.

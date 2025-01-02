@@ -3,7 +3,7 @@ import './Navbar.css'
 import React from 'react'
 import { Menu, X, ChevronDown, ChevronRight } from 'lucide-react'
 import { NavLink, useNavigate } from 'react-router-dom'
-import { FaArrowRight, FaBrain, FaChevronDown, FaEnvelope, FaHome, FaInfoCircle, FaSignInAlt } from 'react-icons/fa';
+import { FaArrowRight,FaUser,FaDoorOpen, FaBrain, FaChevronDown, FaEnvelope, FaHome, FaInfoCircle, FaSignInAlt, FaDoorClosed } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Dropdown } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import { Logout } from '../Store/UserSlice/UserSlice';
+import axios from 'axios'
 
 
 
@@ -24,9 +25,10 @@ import { Logout } from '../Store/UserSlice/UserSlice';
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
   }
-  const small_screen_logout=()=>{
+  const small_screen_logout=async()=>{
 
     toggleMenu()
+       const res=await axios.post('http://localhost:6006/user/logout', {}, { withCredentials: true });
        Swal.fire({
         title: 'Are you sure you want to logout?',
         text: "You will be logged out of your account.",
@@ -49,9 +51,9 @@ import { Logout } from '../Store/UserSlice/UserSlice';
         }
     });
   }
-  const logout=()=>{
+  const logout=async()=>{
   
-      
+    const res=await axios.post('http://localhost:6006/user/logout', {}, { withCredentials: true });
        Swal.fire({
         title: 'Are you sure you want to logout?',
         text: "You will be logged out of your account.",
@@ -350,21 +352,29 @@ import { Logout } from '../Store/UserSlice/UserSlice';
                  (
                   <>
                   <NavLink
-                  to="/userprofile"
+                  to="/test-results"
                   onClick={toggleMenu}
-                  className=" d-flex justify-content-center align-items-center rounded px-3 py-2"
+                  className=" d-flex justify-content-center text-black align-items-center rounded px-3 py-2"
                   style={{ textDecoration: "none" }}
                 >
-                  <FaEnvelope className="me-2" /> Profile
+                  <FaUser className="me-2" /> Test Results
+                </NavLink>
+                  <NavLink
+                  to="/userprofile"
+                  onClick={toggleMenu}
+                  className=" d-flex justify-content-center text-black align-items-center rounded px-3 py-2"
+                  style={{ textDecoration: "none" }}
+                >
+                  <FaUser className="me-2" /> Profile
                 </NavLink>
                  <NavLink
                  to="/logout"
                
                  onClick={small_screen_logout}
-                 className=" d-flex justify-content-center align-items-center rounded px-3 py-2"
+                 className=" d-flex justify-content-center text-black align-items-center rounded px-3 py-2"
                  style={{ textDecoration: "none" }}
                >
-                 <FaEnvelope className="me-2" /> Profile
+                 <FaDoorOpen className="me-2" /> Logout
                </NavLink>
                      </>
                 ) :
