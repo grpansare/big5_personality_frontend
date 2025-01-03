@@ -4,9 +4,8 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base:'/big_5_personality_frontend/',
+  base: '/', // Ensure the base path matches your Netlify domain or subpath
   build: {
-    outDir: 'dist',
-    assetsDir: 'assets', // Ensure assets are placed here
+    outDir: 'dist', // Default build directory
   },
 })
