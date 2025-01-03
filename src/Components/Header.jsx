@@ -28,7 +28,7 @@ import axios from 'axios'
   const small_screen_logout=async()=>{
 
     toggleMenu()
-       const res=await axios.post('http://localhost:6006/user/logout', {}, { withCredentials: true });
+       const res=await axios.post('https://big5-personality-backend-2.onrender.com/user/logout', {}, { withCredentials: true });
        Swal.fire({
         title: 'Are you sure you want to logout?',
         text: "You will be logged out of your account.",
