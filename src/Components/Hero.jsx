@@ -98,7 +98,7 @@ const Hero = () => {
         {/* Hero Image */}
         <div className="hero-image md:w-1/2 px-4 w-96  mt-6 md:mt-0 flex justify-center">
         <img
-  src="/public/big-five-personality-traits-ocean-600nw-2464421715.jpg"
+  src="/big-five-personality-traits-ocean-600nw-2464421715.jpg"
 
   alt="Big Five Personality Illustration"
   className="rounded-lg shadow-lg hero-image"
