@@ -36,14 +36,14 @@ const ProfilePage = () => {
     alert("Handle fule upload")
   
     try {
-      const response = await axios.put(`https://big5-personality-backend-1.onrender.com/user/upload/${currentUser._id}`, formData, {
+      const response = await axios.put(`https://big5-personality-backend-2.onrender.com/user/upload/${currentUser._id}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
       
       const { filePath } = response.data;
-      const imageUrl = `https://big5-personality-backend-1.onrender.com/${filePath}`;
+      const imageUrl = `https://big5-personality-backend-2.onrender.com/${filePath}`;
       
       
       // Update profile picture URL in formData
@@ -59,7 +59,7 @@ const ProfilePage = () => {
       console.log(currentUser);
   
       const res = await axios.put(
-        `https://big5-personality-backend-1.onrender.com/user/update/${currentUser._id}`,
+        `https://big5-personality-backend-2.onrender.com/user/update/${currentUser._id}`,
         { ...formData },
         { withCredentials: true } // Ensure cookies are sent
       );

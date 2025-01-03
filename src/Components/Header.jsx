@@ -53,7 +53,7 @@ import axios from 'axios'
   }
   const logout=async()=>{
   
-    const res=await axios.post('https://big5-personality-backend-1.onrender.com/user/logout', {}, { withCredentials: true });
+    const res=await axios.post('https://big5-personality-backend-2.onrender.com/user/logout', {}, { withCredentials: true });
        Swal.fire({
         title: 'Are you sure you want to logout?',
         text: "You will be logged out of your account.",

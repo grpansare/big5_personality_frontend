@@ -85,7 +85,7 @@ const navigate = useNavigate();
         }
 
         try {
-            const res = await axios.post('https://big5-personality-backend-1.onrender.com/user/signup', formData);
+            const res = await axios.post('https://big5-personality-backend-2.onrender.com/user/signup', formData);
             if (res.data.success) {
                 Swal.fire('Success', 'Registered successfully!', 'success').then(() => {
                     navigate('/login');

@@ -25,7 +25,7 @@ const ChangePassword = () => {
 
     try {
       // Send request to the backend to update the password
-      const response = await axios.post('https://big5-personality-backend-1.onrender.com/user/changepassword', {
+      const response = await axios.post('https://big5-personality-backend-2.onrender.com/user/changepassword', {
         password,userEmail:email
       });
       setSuccess(response.data.msg || 'Password changed successfully!');

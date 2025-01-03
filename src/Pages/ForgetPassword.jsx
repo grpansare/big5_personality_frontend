@@ -47,7 +47,7 @@ const ForgotPassword = () => {
     setUserOtp('')
 
     try {
-      const response = await axios.post('https://big5-personality-backend-1.onrender.com/user/sendemail', { email });
+      const response = await axios.post('https://big5-personality-backend-2.onrender.com/user/sendemail', { email });
       setMessage(response.data.msg);
       setOtp(response.data.otp);
       handleOpen();
