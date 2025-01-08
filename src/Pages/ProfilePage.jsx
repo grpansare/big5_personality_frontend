@@ -89,7 +89,7 @@ const ProfilePage = () => {
     <img
       src={
         currentUser?.profilePicture
-          ? `https://big5-personality-backend-1.onrender.com/${currentUser.profilePicture}`
+          ? `https://big5-personality-backend-2.onrender.com/${currentUser.profilePicture}`
           : formData?.profilePicture
           ? formData.profilePicture
           : "images.jpeg" // Default fallback image
