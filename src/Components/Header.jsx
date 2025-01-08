@@ -1,4 +1,4 @@
-import './Navbar.css'
+import './Header.css'
 
 import React from 'react'
 import { Menu, X, ChevronDown, ChevronRight } from 'lucide-react'
@@ -79,8 +79,8 @@ import axios from 'axios'
   }
 
   return (
-    <div className=" flex items-center  text-white     w-full bg-gray-700 " >
- <div className="mx-auto flex border w-full px-4   items-center justify-between   h-full">
+    <div className="header flex items-center  text-white     w-full bg-gray-700 " >
+ <div className="mx-auto flex  w-full px-4   items-center justify-between   h-full">
 
 
         <div className="inline-flex lg:text-lg text-sm font-mono items-center ">

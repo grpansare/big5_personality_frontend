@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { FaBrain, FaEnvelope, FaGoogle, FaPhone, FaRegKeyboard, FaUser } from 'react-icons/fa';
 import { MdHeight, MdVisibility, MdVisibilityOff } from 'react-icons/md';
 import { FcGoogle } from "react-icons/fc";
+import Grid from '@mui/material/Grid';
 
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -28,7 +29,7 @@ const navigate = useNavigate();
 
  
     const [showPassword, setShowPassword] = React.useState(false);
-    const handleClickShowPassword = () => setShowPassword((show) => !show);
+    const handlePasswordVisibility = () => setShowPassword((show) => !show);
   
     const handleMouseDownPassword = (event) => {
       event.preventDefault();
@@ -140,144 +141,100 @@ const navigate = useNavigate();
                 autoComplete="off"
                 onSubmit={handleSubmit}
             >
-                <div className="w-full flex  sx={{ m: 1, width: '100%' }}">
-                    <TextField
-                       onChange={handleChange}
-                        type="text"
-                        id="outlined-email"
-                        label="First name"
-                        className="w-full"
-                        error={!!errors.firstname}
-                        helperText={errors.firstname}
-                        name="firstname"
-                        
-                        variant="outlined"
-                        slotProps={{
-                            input: {
-                              endAdornment: <InputAdornment position="start"><FaUser/></InputAdornment>,
-                            },
-                          }}
-                    />
-                    <TextField
-                       onChange={handleChange}
-                        type="text"
-                        id="outlined-email"
-                        label="Last name"
-                        className="w-full"
-                        name="lastname"
-                        error={!!errors.lastname}
-                helperText={errors.lastname}
-                        slotProps={{
-                            input: {
-                              endAdornment: <InputAdornment position="start"><FaUser/></InputAdornment>,
-                            },
-                          }}
-                        // helperText="Please enter a valid  username."
-                        variant="outlined"
-                    />
-                </div>
-                <div className="w-full flex  sx={{ m: 1, width: '100%' }}">
-                    <TextField
-                       onChange={handleChange}
-                        type="email"
-                        id="outlined-email"
-                        label="Email"
-                        className="w-full"
-                        name="email"
-                        error={!!errors.email}
-                helperText={errors.email}
-                        variant="outlined"
-                        slotProps={{
-                            input: {
-                              endAdornment: <InputAdornment position="start"><FaEnvelope/></InputAdornment>,
-                            },
-                          }}
-                    />
-                    </div>
-                    <div className="w-full flex mb-2  items-center  sx={{ m: 1, width: '100%' }}">
-                    <TextField
-                       onChange={handleChange}
-                        type="text"
-                        id="outlined-email"
-                        label="Phone Number"
-                        className="w-1/2"
-                        name="phoneno"
-                        error={!!errors.phoneno}
-                        helperText={errors.phoneno}
-                        variant="outlined"
-                        slotProps={{
-                            input: {
-                              endAdornment: <InputAdornment position="start"><FaPhone/></InputAdornment>,
-                            },
-                          }}
-                    />
-                       <TextField
-          id="outlined-select-currency"
-          select
-          label="Designation"
-          defaultValue="Student"
-          name="designation"
-          onChange={handleChange}
-          error={!!errors?.designation}
-                helperText={errors?.designation}
-          
-        >
-        
-            <MenuItem value="Student">
-             Student
-            </MenuItem>
-        
-            <MenuItem value="Teacher">
-            Teacher
-            </MenuItem>
-            <MenuItem value="Professional">
-            Professional
-            </MenuItem>
-         
-        </TextField>
-                    </div>
-                    <div className="w-full flex  sx={{ m: 1, width: '100%' }}">
-                    <TextField
-                       onChange={handleChange}
-                        type="text"
-                        id="outlined-email"
-                        label="username"
-                        
-                        className="w-full"
-                        name="username"
-                        error={!!errors?.username}
-                        helperText={errors?.username}
-                        variant="outlined"
-                        slotProps={{
-                            input: {
-                              endAdornment: <InputAdornment position="start"><FaUser/></InputAdornment>,
-                            },
-                          }}
-                    />
-                    </div>    
 
-                    <div className="w-full flex  sx={{ m: 1, width: '100%' }}">
-                    <TextField
-                       onChange={handleChange}
-                        type="text"
-                        id="outlined-email"
-                        label="age"
-                   
-                        className="w-full"
-                        name="age"
-                        error={!!errors.age}
-                        helperText={errors.age}
-                        variant="outlined"
-                        slotProps={{
-                            input: {
-                              endAdornment: <InputAdornment position="start"><FaUser/></InputAdornment>,
-                            },
-                          }}
-                    />
-                    </div>    
-                <div className="w-full">
+<Grid container spacing={2}>
+            {/** First Name and Last Name */}
+            <Grid item xs={12} sm={6}>
+              <TextField
+                fullWidth
+                name="firstname"
+                label="First Name"
+                value={formData.firstname}
+                onChange={handleChange}
+                error={!!errors.firstname}
+                helperText={errors.firstname}
+                InputProps={{
+                  endAdornment: <InputAdornment position="end"><FaUser /></InputAdornment>,
+                }}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                fullWidth
+                name="lastname"
+                label="Last Name"
+                value={formData.lastname}
+                onChange={handleChange}
+                error={!!errors.lastname}
+                helperText={errors.lastname}
+                InputProps={{
+                  endAdornment: <InputAdornment position="end"><FaUser /></InputAdornment>,
+                }}
+              />
+            </Grid>
+
+            {/** Email */}
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                name="email"
+                label="Email"
+                value={formData.email}
+                onChange={handleChange}
+                error={!!errors.email}
+                helperText={errors.email}
+                InputProps={{
+                  endAdornment: <InputAdornment position="end"><FaEnvelope /></InputAdornment>,
+                }}
+              />
+            </Grid>
+
+            {/** Phone Number and Age */}
+            <Grid item xs={12} sm={6}>
+              <TextField
+                fullWidth
+                name="phoneno"
+                label="Phone Number"
+                value={formData.phoneno}
+                onChange={handleChange}
+                error={!!errors.phoneno}
+                helperText={errors.phoneno}
+                InputProps={{
+                  endAdornment: <InputAdornment position="end"><FaPhone /></InputAdornment>,
+                }}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                fullWidth
+                name="age"
+                label="Age"
+                value={formData.age}
+                onChange={handleChange}
+                error={!!errors.age}
+                helperText={errors.age}
+              />
+            </Grid>
+
+            {/** Username */}
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                name="username"
+                label="Username"
+                value={formData.username}
+                onChange={handleChange}
+                error={!!errors.username}
+                helperText={errors.username}
+              />
+            </Grid>
+
+            {/** Password and Confirm Password */}
+          
+          </Grid>
+          <div className="w-full">
      <FormControl
-    sx={{ m: 1, width: '96%' }}
+    sx={{ m: 1, width: '100%' }}
     variant="outlined"
     error={!!errors.password} // Highlights the input if there's a password error
 >
@@ -292,7 +249,7 @@ const navigate = useNavigate();
             <InputAdornment position="end">
                 <IconButton
                     aria-label={showPassword ? 'Hide password' : 'Show password'}
-                    onClick={handleClickShowPassword}
+                    onClick={handlePasswordVisibility}
                     onMouseDown={handleMouseDownPassword}
                     onMouseUp={handleMouseUpPassword}
                     edge="end"
@@ -310,7 +267,7 @@ const navigate = useNavigate();
     )}
              </FormControl>
      <FormControl
-    sx={{ m: 1, width: '96%' }}
+    sx={{ m: 1, width: '100%' }}
     variant="outlined"
     error={!!errors.cpassword} // Highlights the input if there's a password error
 >
@@ -325,7 +282,7 @@ const navigate = useNavigate();
             <InputAdornment position="end">
                 <IconButton
                     aria-label={showPassword ? 'Hide password' : 'Show password'}
-                    onClick={handleClickShowPassword}
+                    onClick={handlePasswordVisibility}
                     onMouseDown={handleMouseDownPassword}
                     onMouseUp={handleMouseUpPassword}
                     edge="end"
@@ -345,6 +302,7 @@ const navigate = useNavigate();
 
 
                 </div>
+
                 <button disabled={isFormValid}  className="bg-slate-700 relative   text-white p-3 mx-auto rounded-lg uppercase hover:opacity-95 disabled:opacity-80 w-full mt-4">
               
             Sign Up

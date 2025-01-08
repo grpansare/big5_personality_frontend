@@ -1,9 +1,10 @@
 import { FaBrain } from "react-icons/fa";
+import './Footer.css'
 
 export default function Footer() {
   return (
-    <div className="container-fluid bg-gray-700 text-white position-fixed bottom-0  shadow-lg">
-      <footer className="d-flex flex-wrap justify-around align-items-center py-3 border-top">
+    <div className="container-fluid   footer bg-gray-700 text-white position-fixed bottom-0  shadow-lg">
+      <footer className="d-flex flex-wrap justify-around align-items-center ">
         <div className="col-md-4 d-flex align-items-center">
           <a
             href="/"

@@ -78,7 +78,7 @@ const LoginPage = () => {
           <img
             src="/big-five-personality.webp" 
             alt="Welcome"
-            className="welcome-image img-fluid"
+            className="welcome-image "
           />
         </div>
 

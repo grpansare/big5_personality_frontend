@@ -44,7 +44,7 @@ const AboutUs = () => {
   <div className="image-div w-full md:w-1/2 p-2">
     <img
       className="w-full rounded-lg h-64 md:h-96 object-cover"
-      src="/public/aboutus2.jfif"
+      src="aboutus2.jfif"
       alt="About Us"
     />
   </div>

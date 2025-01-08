@@ -59,8 +59,9 @@ const TestimonialsSlider = () => {
       {
         breakpoint: 768, // For small screens (768px and below)
         settings: {
-          slidesToShow: 1, // Show 1 slide on small screens
+          slidesToShow: 1,
           slidesToScroll: 1,
+          
         },
       },
     ],
@@ -73,7 +74,11 @@ const TestimonialsSlider = () => {
       </h1>
       <Slider {...settings}>
         {testimonials.map((testimonial) => (
-          <div key={testimonial.id} className="testimonial-slide mx-auto max-w-xl  mt-5   rounded-md bg-white p-7">
+   <div
+   key={testimonial.id}
+   className="testimonial-slide mx-auto max-w-xl sm:w-3/4 md:w-1/2 mt-5 rounded-md bg-white "
+ >
+ 
             <div className="testimonial-content border">
               {/* Rating Section */}
               <div className="mb-4 flex space-x-2">

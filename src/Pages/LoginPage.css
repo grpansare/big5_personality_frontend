@@ -148,7 +148,7 @@ h2 {
 
   .image-section {
     height: 40vh; 
-    /* border: 1px solid black; */
+
     
   }
 
@@ -198,6 +198,18 @@ h2 {
     font-size: 0.85rem;
     padding: 8px 35px 8px 10px;
   }
+  .image-section {
+    height: 20vh; 
+ 
+    
+  }
+  
+  .welcome-image {
+    width: 100%;
+    height: 10%;
+    object-fit: cover;
+    object-position: center;
+  }
 
   .login-button {
     font-size: 0.8rem;
@@ -218,6 +230,20 @@ h2 {
     font-size: 0.8rem;
     padding: 8px;
   }
+  .image-section {
+    height: 10vh; 
+
+  
+    
+  }
+  
+  .welcome-image {
+    width: 100%;
+    height: 880px;
+    object-fit: cover;
+    object-position: center;
+   
+  }
 
   .login-button {
     font-size: 0.7rem;
@@ -229,10 +255,38 @@ h2 {
   .welcome-image {
     height: 20%; /* Reduce height for medium screens */
   }
+  .image-section {
+    height: 20vh; 
+    /* border: 1px solid black; */
+    
+  }
+  
+  .welcome-image {
+    width: 100%;
+    height: 10%;
+    object-fit: cover;
+    object-position: center;
+  }
 }
 
 @media (max-width: 480px) {
   .welcome-image {
-    height: 15%; /* Further reduce height for small screens */
+    width: 80%; /* Reduce width */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: cover;
+    object-position: center;
+    margin: 0 auto; /* Center the image */
+    border-radius: 50%;
+  }
+
+  .image-section {
+    height: auto; /* Allow height to adjust dynamically */
+    padding: 10px; /* Add padding for better layout */
+  }
+  .image-section {
+    height: auto; 
+    /* border: 1px solid black; */
+    
   }
 }
+

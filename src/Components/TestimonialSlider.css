@@ -14,7 +14,7 @@
   .testimonial-slide {
     display: flex;
     justify-content: center;
-    padding: 0 10px;
+    /* padding: 0 10px; */
   }
   
   .testimonial-content {
@@ -49,4 +49,10 @@
     color: #777;
   }
   
-   
+  @media (max-width: 568px) {
+    .testimonial-slide {
+      width: 90%; /* Set width for small screens */
+      margin: 0 auto; /* Center the slide */
+    }
+  }
+  
