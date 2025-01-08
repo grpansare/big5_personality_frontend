@@ -104,7 +104,7 @@ const ProfilePage = () => {
       Change Picture
     </button>
   </div>
-</div>
+
 
         <div className="profile-details">
           {isEditing ? (
