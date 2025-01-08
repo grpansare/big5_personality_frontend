@@ -84,15 +84,28 @@ const ProfilePage = () => {
           accept='image/*'
           onChange={(e) => setImage(e.target.files[0])}
         />
-      <div className="profile-container">
-        <div className="profile-pic-container">
-          <img
-            src={`https://big5-personality-backend-1.onrender.com/${currentUser?.profilePicture}`|| "images.jpeg"||formData?.profilePicture}
-            alt="Profile"
-            className="profile-pic"
-          />
-          <button className="change-pic-button"   onClick={() => fileRef?.current.click()}>Change Picture</button>
-        </div>
+     <div className="profile-container">
+  <div className="profile-pic-container">
+    <img
+      src={
+        currentUser?.profilePicture
+          ? `https://big5-personality-backend-1.onrender.com/${currentUser.profilePicture}`
+          : formData?.profilePicture
+          ? formData.profilePicture
+          : "images.jpeg" // Default fallback image
+      }
+      alt="Profile"
+      className="profile-pic"
+    />
+    <button
+      className="change-pic-button"
+      onClick={() => fileRef?.current?.click()} // Ensure fileRef is safe to access
+    >
+      Change Picture
+    </button>
+  </div>
+</div>
+
         <div className="profile-details">
           {isEditing ? (
             <>
