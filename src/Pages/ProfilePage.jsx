@@ -44,7 +44,7 @@ const ProfilePage = () => {
       
       const { filePath } = response.data;
       const imageUrl = `https://big5-personality-backend-2.onrender.com/${filePath}`;
-      
+      console.log(filePath)
       
       // Update profile picture URL in formData
       setFormData({ ...formData, profilePicture: imageUrl});
