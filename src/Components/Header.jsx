@@ -28,7 +28,7 @@ import axios from 'axios'
   const small_screen_logout=async()=>{
 
     toggleMenu()
-       const res=await axios.post('https://big5-personality-backend-2.onrender.com/user/logout', {}, { withCredentials: true });
+       
        Swal.fire({
         title: 'Are you sure you want to logout?',
         text: "You will be logged out of your account.",
@@ -40,6 +40,7 @@ import axios from 'axios'
         cancelButtonText: 'Cancel'
     }).then((result) => {
         if (result.isConfirmed) {
+          logoutfunc()
           dispatch(Logout())
             Swal.fire(
                 'Logged Out!',
@@ -49,7 +50,11 @@ import axios from 'axios'
                 navigate('/'); // Navigate to login or home page
             });
         }
+
     });
+  }
+  const logoutfunc=async()=>{
+    const res=await axios.post('https://big5-personality-backend-2.onrender.com/user/logout', {}, { withCredentials: true });
   }
   const logout=async()=>{
   
@@ -368,7 +373,7 @@ import axios from 'axios'
                   <FaUser className="me-2" /> Profile
                 </NavLink>
                  <NavLink
-                 to="/logout"
+                 
                
                  onClick={small_screen_logout}
                  className=" d-flex justify-content-center text-black align-items-center rounded px-3 py-2"
